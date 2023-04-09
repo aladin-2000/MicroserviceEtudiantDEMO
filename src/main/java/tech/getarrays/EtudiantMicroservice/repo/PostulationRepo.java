@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface PostulationRepo extends JpaRepository<Postulation, Long> {
     void deletePostulationById(Long id);
+    Optional<Postulation> findPostulationById(Long id);
+
 
 }

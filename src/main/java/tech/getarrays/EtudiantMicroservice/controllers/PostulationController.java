@@ -42,4 +42,8 @@ public class PostulationController {
         postulationService.deletePostulation(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-}
+    @PutMapping("/valider/{id}")
+    public ResponseEntity<Postulation> validerPostulation(@PathVariable("id") Long id) {
+        postulationService.validerPostulation(id);
+        return new ResponseEntity<>(HttpStatus.OK);}
+    }

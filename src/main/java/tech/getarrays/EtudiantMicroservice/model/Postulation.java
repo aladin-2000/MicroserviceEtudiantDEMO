@@ -11,6 +11,7 @@ public class Postulation implements Serializable {
     private Long id;
     private Long idSujet;
     private Long idEtudiant;
+    private boolean Valide;
 
     public Postulation(Long idSujet,Long idEtudiant) {
 
@@ -45,25 +46,10 @@ public class Postulation implements Serializable {
         this.idEtudiant = idEtudiant;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "idPostulation=" + id +
-                ", idSujet='" + idSujet + '\'' +
-                ", idEtudiant='" + idEtudiant + '\'' +
-                '}';
+    public void setValide(boolean valide) {
+        Valide = valide;
     }
+    public boolean getValide(){return this.Valide;}
+
+
 }
