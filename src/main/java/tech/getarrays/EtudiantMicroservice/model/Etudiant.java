@@ -19,6 +19,8 @@ public class Etudiant implements Serializable {
     private String filere;
     private String descreption;
     private String password;
+    private boolean enabled;
+
 
 
     public Etudiant() {}
@@ -31,6 +33,8 @@ public class Etudiant implements Serializable {
         this.lastname=lastname;
         this.filere=filere;
         this.descreption=descreption;
+        this.enabled=false;
+
     }
 
     public Long getId() {
@@ -39,6 +43,11 @@ public class Etudiant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean getEnabled(){return this.enabled;}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 

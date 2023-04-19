@@ -2,27 +2,27 @@ package tech.getarrays.EtudiantMicroservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.getarrays.EtudiantMicroservice.exception.UserNotFoundException;
+import tech.getarrays.EtudiantMicroservice.model.Etudiant;
 import tech.getarrays.EtudiantMicroservice.model.Postulation;
-import tech.getarrays.EtudiantMicroservice.model.Sujet;
+import tech.getarrays.EtudiantMicroservice.repo.EtudiantRepo;
 import tech.getarrays.EtudiantMicroservice.repo.PostulationRepo;
-import tech.getarrays.EtudiantMicroservice.repo.SujetRepo;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class PostulationService {
     private final PostulationRepo postulationRepo;
-    private final SujetRepo sujetRepo;
+    private final EtudiantService etudiantService;
 
 
 
     @Autowired
-    public PostulationService(PostulationRepo postulationRepo,SujetRepo sujetRepo) {
+    public PostulationService(PostulationRepo postulationRepo,EtudiantService etudiantService) {
         this.postulationRepo = postulationRepo;
-        this.sujetRepo = sujetRepo;
+        this.etudiantService=etudiantService;
     }
 
     public Postulation addPostulation(Postulation postulation) {
@@ -38,19 +38,20 @@ public class PostulationService {
         return postulationRepo.save(postulation);
     }
 
-    public void validerPostulation(Long id){
-        Postulation postulation;
-        postulation=postulationRepo.findPostulationById(id)
-                .orElseThrow(() -> new UserNotFoundException("Postulation not found"));
+    public List<Etudiant> findAllPostulationsByIdSujet(Long idSuejt) {
+        List<Postulation> L=postulationRepo.FindEtudiantByIdSujet(idSuejt);
+        List <Etudiant> resulat = new ArrayList<>();
+        for (int i = 0; i < L.size(); i++) {
+            Postulation postulation = L.get(i);
+            Long I;
+           I =  postulation.getIdEtudiant();
+           Etudiant etudiant= etudiantService.findEtudiantById(I);
+           resulat.add(etudiant);
 
-        postulation.setValide(true);
-        Sujet sujet;
-        Long IDsuj=postulation.getIdSujet();
-        sujet=sujetRepo.findSujetById(IDsuj)
-                .orElseThrow(() -> new UserNotFoundException("Sujet not found"));
-        sujet.setTaken(true);
-
+        }
+        return resulat;
     }
+
 
     public void deletePostulation(Long id){
         postulationRepo.deletePostulationById(id);

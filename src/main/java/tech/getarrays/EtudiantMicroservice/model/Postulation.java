@@ -1,9 +1,12 @@
 package tech.getarrays.EtudiantMicroservice.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
 public class Postulation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,34 +25,7 @@ public class Postulation implements Serializable {
     public Postulation() {}
 
 
-        public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdSujet() {
-        return idSujet;
-    }
-
-    public void setIdidSujet(Long idSujet) {
-        this.idSujet = idSujet;
-    }
-
-    public Long getIdEtudiant() {
-        return idEtudiant;
-    }
-
-    public void setIdIdEtudiant(Long idEtudiant) {
-        this.idEtudiant = idEtudiant;
-    }
-
-    public void setValide(boolean valide) {
-        Valide = valide;
-    }
-    public boolean getValide(){return this.Valide;}
 
 
 }

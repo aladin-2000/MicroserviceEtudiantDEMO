@@ -3,6 +3,7 @@ package tech.getarrays.EtudiantMicroservice.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.getarrays.EtudiantMicroservice.model.Etudiant;
 import tech.getarrays.EtudiantMicroservice.model.Postulation;
 import tech.getarrays.EtudiantMicroservice.service.PostulationService;
 
@@ -42,8 +43,12 @@ public class PostulationController {
         postulationService.deletePostulation(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PutMapping("/valider/{id}")
-    public ResponseEntity<Postulation> validerPostulation(@PathVariable("id") Long id) {
-        postulationService.validerPostulation(id);
-        return new ResponseEntity<>(HttpStatus.OK);}
+
+    @GetMapping("/EtudiantPostule/{idSujet}")
+    public ResponseEntity<List<Etudiant>> findAllPostulationsByIdSujet(@PathVariable("idSujet") Long idSujet) {
+        List<Etudiant> etudiants = postulationService.findAllPostulationsByIdSujet(idSujet);
+        return new ResponseEntity<>(etudiants, HttpStatus.OK);
     }
+
+
+}
